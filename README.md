@@ -1,2 +1,18 @@
-# LatihanUKL-FahryIrvanY.
-Pengumpulan Latihan UKL 3-4 November 2025
+## 📦 auth.controller.ts
+
+```typescript
+import { Body, Controller, Post } from '@nestjs/common';
+import { AuthService } from './auth.service';
+
+@Controller('auth')
+export class AuthController {
+    constructor(private readonly authService: AuthService){}
+
+    @Post('login')
+    async login(@Body() body: any){
+        const {username, password} = body;
+        const result = await this.authService.validateUser(username, password);
+
+        return result;
+    }
+}
